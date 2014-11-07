@@ -23,6 +23,7 @@
 #include <linux/uaccess.h>
 #include <linux/regulator/consumer.h>
 
+
 #include "mdss.h"
 #include "mdss_mdp.h"
 #include "mdss_panel.h"

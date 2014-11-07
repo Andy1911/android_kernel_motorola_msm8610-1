@@ -10,8 +10,13 @@
  * GNU General Public License for more details.
  */
 
+<<<<<<< HEAD
 #include "msm8x10_wcd_registers.h"
+=======
+
+>>>>>>> f3493dd... update
 #include "msm8x10-wcd.h"
+#include "msm8x10_wcd_registers.h"
 
 const u8 msm8x10_wcd_reg_readable[MSM8X10_WCD_CACHE_SIZE] = {
 	[MSM8X10_WCD_A_CHIP_CTL] = 1,

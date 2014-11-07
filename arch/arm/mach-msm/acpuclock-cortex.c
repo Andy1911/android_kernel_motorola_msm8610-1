@@ -289,7 +289,7 @@ static unsigned long acpuclk_cortex_get_rate(int cpu)
 }
 
 #ifdef CONFIG_CPU_FREQ_MSM
-static struct cpufreq_frequency_table freq_table[30];
+static struct cpufreq_frequency_table freq_table[37];
 
 static void __init cpufreq_table_init(void)
 {
@@ -298,7 +298,7 @@ static void __init cpufreq_table_init(void)
 	/* Construct the freq_table tables from priv->freq_tbl. */
 	for (i = 0; priv->freq_tbl[i].khz != 0
 			&& freq_cnt < ARRAY_SIZE(freq_table) - 1; i++) {
-		if (!priv->freq_tbl[i].use_for_scaling)
+		if (priv->freq_tbl[i].khz>=300000 && priv->freq_tbl[i].khz<=1593600)
 			continue;
 		freq_table[freq_cnt].index = freq_cnt;
 		freq_table[freq_cnt].frequency = priv->freq_tbl[i].khz;
@@ -325,7 +325,7 @@ static struct acpuclk_data acpuclk_cortex_data = {
 	.get_rate = acpuclk_cortex_get_rate,
 };
 
-void __init get_speed_bin(void __iomem *base, struct bin_info *bin)
+/*void __init get_speed_bin(void __iomem *base, struct bin_info *bin)
 {
 	u32 pte_efuse, redundant_sel;
 
@@ -336,18 +336,18 @@ void __init get_speed_bin(void __iomem *base, struct bin_info *bin)
 	if (redundant_sel == 1)
 		bin->speed = (pte_efuse >> 27) & 0x7;
 
-	bin->speed_valid = !!(pte_efuse & BIT(3));
-	pr_info("get_speed_bin: pte_efuse[%X]\n", pte_efuse);
-}
+	bin->speed_valid = true; // dangerous thing to do probably 
+	//pr_info("get_speed_bin: pte_efuse[%X]\n", pte_efuse); 
+}*/
 
 static struct clkctl_acpu_speed *__init select_freq_plan(void)
 {
-	struct bin_info bin;
+/*	struct bin_info bin;
 
-	if (!priv->pte_efuse_base)
-		return priv->freq_tbl;
+		//if (!priv->pte_efuse_base)
+	//	return priv->freq_tbl;
 
-	get_speed_bin(priv->pte_efuse_base, &bin);
+	//	get_speed_bin(priv->pte_efuse_base, &bin);
 
 	if (bin.speed_valid) {
 		pr_info("SPEED BIN: %d\n", bin.speed);
@@ -355,9 +355,9 @@ static struct clkctl_acpu_speed *__init select_freq_plan(void)
 		bin.speed = 0;
 		pr_warn("SPEED BIN: Defaulting to %d\n",
 			 bin.speed);
-	}
+	}*/
 
-	return priv->pvs_tables[bin.speed];
+	return priv->pvs_tables[1];
 }
 
 int __init acpuclk_cortex_init(struct platform_device *pdev,
@@ -386,7 +386,6 @@ int __init acpuclk_cortex_init(struct platform_device *pdev,
 
 	/* Improve boot time by ramping up CPU immediately */
 	for (i = 0; priv->freq_tbl[i].khz != 0; i++)
-		if (priv->freq_tbl[i].use_for_scaling)
 			max_cpu_khz = priv->freq_tbl[i].khz;
 
 	/* Initialize regulators */
@@ -427,3 +426,4 @@ err_vdd_cpu:
 err_vdd:
 	return rc;
 }
+

@@ -32,13 +32,14 @@
 
 		/* Bus Scale Settings */
 		qcom,msm-bus,name = "grp3d";
-		qcom,msm-bus,num-cases = <4>;
+		qcom,msm-bus,num-cases = <5>;
 		qcom,msm-bus,num-paths = <1>;
 		qcom,msm-bus,vectors-KBps =
 			<26 512 0 0>,
 			<26 512 0 800000>,
 			<26 512 0 1600000>,
-			<26 512 0 2128000>;
+			<26 512 0 2128000>,
+			<26 512 0 2256000>;
 
 		/* GDSC oxili regulators */
 		vdd-supply = <&gdsc_oxili_cx>;
@@ -58,15 +59,15 @@
 
 			qcom,gpu-pwrlevel@0 {
 				reg = <0>;
-				qcom,gpu-freq = <400000000>;
-				qcom,bus-freq = <3>;
+				qcom,gpu-freq = <433000000>;
+				qcom,bus-freq = <4>;
 				qcom,io-fraction = <0>;
 			};
 
 			qcom,gpu-pwrlevel@1 {
 				reg = <1>;
 				qcom,gpu-freq = <300000000>;
-				qcom,bus-freq = <2>;
+				qcom,bus-freq = <3>;
 				qcom,io-fraction = <33>;
 			};
 
@@ -79,7 +80,7 @@
 
 			qcom,gpu-pwrlevel@3 {
 				reg = <3>;
-				qcom,gpu-freq = <150000000>;
+				qcom,gpu-freq = <15000000>;
 				qcom,bus-freq = <1>;
 				qcom,io-fraction = <100>;
 			};

@@ -32,13 +32,10 @@
 #include <linux/qpnp-revid.h>
 #include <linux/android_alarm.h>
 #include <linux/spinlock.h>
-<<<<<<< HEAD
-=======
 #include <linux/batterydata-lib.h>
 #ifdef CONFIG_FORCE_FAST_CHARGE
 #include <linux/fastchg.h>
 #endif
->>>>>>> 2fbd578... Fix Force usb fast charge v2 (adapt for msm8610-qpnp)
 
 /* Interrupt offsets */
 #define INT_RT_STS(base)			(base + 0x10)
