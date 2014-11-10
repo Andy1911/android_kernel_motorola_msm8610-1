@@ -44,11 +44,10 @@ config CPU_FREQ_STAT_DETAILS
 
 choice
 	prompt "Default CPUFreq governor"
-	default CPU_FREQ_DEFAULT_GOV_USERSPACE if CPU_FREQ_SA1100 || CPU_FREQ_SA1110
-	default CPU_FREQ_DEFAULT_GOV_PERFORMANCE
+	default CPU_FREQ_DEFAULT_ALPHA
 	help
 	  This option sets which CPUFreq governor shall be loaded at
-	  startup. If in doubt, select 'performance'.
+	  startup. If in doubt, select 'Alpha'.
 
 config CPU_FREQ_DEFAULT_GOV_PERFORMANCE
 	bool "performance"
@@ -100,14 +99,11 @@ config CPU_FREQ_DEFAULT_GOV_CONSERVATIVE
 	  governor. If unsure have a look at the help section of the
 	  driver. Fallback governor will be the performance governor.
 
-config CPU_FREQ_DEFAULT_GOV_INTERACTIVE
-	bool "interactive"
-	select CPU_FREQ_GOV_INTERACTIVE
+config CPU_FREQ_DEFAULT_GOV_ALPHA
+	bool "alpha"
+	select CPU_FREQ_GOV_ALPHA
 	help
-	  Use the CPUFreq governor 'interactive' as default. This allows
-	  you to get a full dynamic cpu frequency capable system by simply
-	  loading your cpufreq low-level hardware driver, using the
-	  'interactive' governor for latency-sensitive workloads.
+	  Use the CPUFreq governor 'Alpha' as default.
 
 endchoice
 
@@ -165,6 +161,16 @@ config CPU_FREQ_GOV_ONDEMAND
 	  For details, take a look at linux/Documentation/cpu-freq.
 
 	  If in doubt, say N.
+
+
+config CPU_FREQ_GOV_ALPHA
+	tristate "'Alpha' cpufreq governor"
+	depends on CPU_FREQ
+	help
+	 'Alpha' - a "powered and smart" governor , basd on smartass v2
+	
+	 If in doubt, say Y.
+
 
 config CPU_FREQ_GOV_INTERACTIVE
 	tristate "'interactive' cpufreq policy governor"
