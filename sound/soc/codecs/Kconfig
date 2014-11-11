@@ -507,6 +507,6 @@ config SND_SOC_TPA6165A2
 
 config SOUND_CONTROL_HAX_3_GPL
 	 tristate "new wcd9xxx sound control hax"
-	 default n
+	 default y
 	 help
 	 FauxSound wcd9xxx chipset sound control hacks 3.0 for deeper hax
