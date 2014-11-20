@@ -1,0 +1,89 @@
+#!/system/bin/sh
+
+##
+#
+# /etc/init.d script
+# For MOTO E ALPHA KERNEL
+# credits to BrateloSlava, 4pda.ru + XDA
+# 
+##
+
+IO_SCH="bfq"
+READ_AHEAD_KB="4096"
+# wait for android os
+until [ `pidof com.android.systemui` ]; do
+sleep 1
+done;
+sleep 30
+
+## Set min CPU_FREQ
+echo 96000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq;
+chmod 444 /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+echo 96000 > /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq;
+chmod 444 /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq
+
+## Set max CPU_FREQ
+echo 1190400 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq;
+chmod 444 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+echo 1190400 > /sys/devices/system/cpu/cpu1/cpufreq/scaling_max_freq;
+chmod 444 /sys/devices/system/cpu/cpu1/cpufreq/scaling_max_freq
+
+### Enable fastcharge
+if [ -e /sys/kernel/fast_charge/ ]; then
+echo "1" > /sys/kernel/fast_charge/force_fast_charge
+fi;
+
+### Logger mode
+## 0 - Enabled
+## 1 - Auto Suspend
+## 2 - Disabled
+
+if [ -e /sys/module/logger/parameters/log_mode ]; then
+echo "2" > /sys/module/logger/parameters/log_mode
+fi;
+
+### Printk logging control
+## 0 - Disable
+## 1 - Enable
+
+if [ -e /sys/kernel/printk_mode/ ]; then
+echo "0" > /sys/kernel/printk_mode/printk_mode
+fi;
+
+# vibration level (default 32)
+chmod 644 /sys/class/timed_output/vibrator/level
+echo 24 > /sys/class/timed_output/vibrator/level;
+chmod 444 /sys/class/timed_output/vibrator/level
+
+### SDcard read ahead
+VD=`ls -d /sys/devices/virtual/bdi/*`
+for i in $VD; do
+echo $READ_AHEAD_KB > $i/read_ahead_kb;
+done
+sleep 3
+
+echo "930000 1000000 1100000" > /sys/devices/system/cpu/cpu0/cpufreq/gpu_mv_table;
+
+## Cpu governor
+chmod 644 /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+echo "alpha" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor;
+chmod 444 /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+sleep 3
+
+## Some tweaks
+setprop net.ppp0.dns1 8.8.8.8;
+setprop net.ppp0.dns2 8.8.4.4;
+setprop net.dns1 8.8.8.8;
+setprop net.dns2 8.8.4.4;
+setprop ro.ril.enable.a53 1;
+setprop ro.ril.enable.a52 0;
+setprop ro.ril.enable.dtm 1;
+setprop ro.com.google.locationfeatures 0;
+setprop ro.com.google.networklocation 0;
+setprop profiler.force_disable_err_rpt 1;
+setprop profiler.force_disable_ulog 1;
+setprop logcat.live disable;
+setprop ro.lge.proximity.delay 25;
+setprop mot.proximity.delay 25;
+setprop ro.telephony.call_ring.delay 0;
+setprop wifi.supplicant_scan_interval 180
