@@ -23,11 +23,8 @@
 /* 
  * Timeout for stopping processes
  */
-<<<<<<< HEAD
-#define TIMEOUT	(20 * HZ)
-=======
+=
 unsigned int __read_mostly freeze_timeout_msecs = 5 * MSEC_PER_SEC;
->>>>>>> e8a0bb6... Fix : Suspend: enable freeze timeout configuration through sys
 
 static int try_to_freeze_tasks(bool user_only)
 {
