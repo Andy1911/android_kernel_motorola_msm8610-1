@@ -114,8 +114,13 @@ static int ghash_final(struct shash_desc *desc, u8 *dst)
 	struct ghash_desc_ctx *dctx = shash_desc_ctx(desc);
 	struct ghash_ctx *ctx = crypto_shash_ctx(desc->tfm);
 
+<<<<<<< HEAD
 	ghash_flush(ctx, dctx);
 	memcpy(dst, ctx->icv, GHASH_BLOCK_SIZE);
+=======
+	ghash_flush(dctx);
+	memcpy(dst, dctx->icv, GHASH_BLOCK_SIZE);
+>>>>>>> 6b0c023... Linux 3.4.110
 
 	return 0;
 }
