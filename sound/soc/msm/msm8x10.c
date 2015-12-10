@@ -27,9 +27,13 @@
 #include <asm/mach-types.h>
 #include <mach/socinfo.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 #include "qdsp6v2/msm-pcm-routing-v2.h"
 >>>>>>> f3493dd... update
+=======
+#include <qdsp6v2/msm-pcm-routing-v2.h>
+>>>>>>> parent of f3493dd... update
 #include <sound/q6afe-v2.h>
 #include <linux/module.h>
 #include <mach/gpiomux.h>

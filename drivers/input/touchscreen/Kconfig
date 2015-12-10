@@ -1120,6 +1120,7 @@ config TOUCHSCREEN_GT9XX
           If unsure, say N.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 config TOUCHSCREEN_TOUCHX_BASE
         bool "Enable kernel support for predictive touch module"
         default y
@@ -1160,6 +1161,8 @@ config TOUCHSCREEN_POWERSUSPEND
 
 >>>>>>> f3493dd... update
 
+=======
+>>>>>>> parent of f3493dd... update
 source "drivers/input/touchscreen/gt9xx/Kconfig"
 
 endif
