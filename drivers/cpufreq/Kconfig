@@ -44,10 +44,10 @@ config CPU_FREQ_STAT_DETAILS
 
 choice
 	prompt "Default CPUFreq governor"
-	default CPU_FREQ_DEFAULT_ALPHA
+	default CPU_FREQ_DEFAULT_ANDY
 	help
 	  This option sets which CPUFreq governor shall be loaded at
-	  startup. If in doubt, select 'Alpha'.
+	  startup. If in doubt, select 'Andy'.
 
 config CPU_FREQ_DEFAULT_GOV_PERFORMANCE
 	bool "performance"
@@ -99,11 +99,11 @@ config CPU_FREQ_DEFAULT_GOV_CONSERVATIVE
 	  governor. If unsure have a look at the help section of the
 	  driver. Fallback governor will be the performance governor.
 
-config CPU_FREQ_DEFAULT_GOV_ALPHA
-	bool "alpha"
-	select CPU_FREQ_GOV_ALPHA
+config CPU_FREQ_DEFAULT_GOV_ANDY
+	bool "andy"
+	select CPU_FREQ_GOV_ANDY
 	help
-	  Use the CPUFreq governor 'Alpha' as default.
+	  Use the CPUFreq governor 'Andy' as default.
 
 endchoice
 
@@ -163,11 +163,11 @@ config CPU_FREQ_GOV_ONDEMAND
 	  If in doubt, say N.
 
 
-config CPU_FREQ_GOV_ALPHA
-	tristate "'Alpha' cpufreq governor"
+config CPU_FREQ_GOV_ANDY
+	tristate "'Andy' cpufreq governor"
 	depends on CPU_FREQ
 	help
-	 'Alpha' - a "powered and smart" governor , basd on smartass v2
+	 'Andy' - a "powered and smart" governor , basd on smartass v2
 	
 	 If in doubt, say Y.
 
