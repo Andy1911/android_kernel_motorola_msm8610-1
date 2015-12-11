@@ -1369,12 +1369,9 @@ static int check_preds(struct filter_parse_state *ps)
 			continue;
 		}
 		n_normal_preds++;
-<<<<<<< HEAD
-=======
 		/* all ops should have operands */
 		if (cnt < 0)
 			break;
->>>>>>> 6b0c023... Linux 3.4.110
 	}
 
 	if (!n_normal_preds || n_logical_preds >= n_normal_preds) {

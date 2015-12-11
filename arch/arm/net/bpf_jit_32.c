@@ -876,9 +876,6 @@ void bpf_jit_compile(struct sk_filter *fp)
 
 	ctx.idx = 0;
 	build_prologue(&ctx);
-<<<<<<< HEAD
-	build_body(&ctx);
-=======
 	if (build_body(&ctx) < 0) {
 #if __LINUX_ARM_ARCH__ < 7
 		if (ctx.imm_count)
@@ -887,7 +884,6 @@ void bpf_jit_compile(struct sk_filter *fp)
 		module_free(NULL, ctx.target);
 		goto out;
 	}
->>>>>>> 6b0c023... Linux 3.4.110
 	build_epilogue(&ctx);
 
 	flush_icache_range((u32)ctx.target, (u32)(ctx.target + ctx.idx));
